@@ -15,7 +15,7 @@ const HeaderComponent = ({
     refresh,
     text
 }: HeaderComponentProps) => {
-    return <h2 className="text-white bg-gray-700 pt-1 p-1 pl-2 mb-2 rounded-md border-b-2 border-gray-500 border-solid">
+    return <h2 className="text-white bg-neutral-900 pt-1 p-1 pl-2 mb-2 rounded-md border-b-2 border-blue-500 border-solid">
         {icon === "StopCircleIcon" && <StopCircleIcon className="h-8 w-8 inline pr-2" />}
         {icon === "Square2StackIcon" && <Square2StackIcon className="h-8 w-8 inline pr-2" />}
         {icon === "ArrowDownOnSquareStackIcon" && <ArrowDownOnSquareStackIcon className="h-8 w-8 inline pr-2" />}

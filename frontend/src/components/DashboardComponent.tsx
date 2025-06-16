@@ -7,6 +7,7 @@ import { HeaderComponent } from '../components/HeaderComponent'
 import { EmptyComponent } from '../components/EmptyComponent'
 import { MessageIcon } from '../components/MessageIcon'
 
+
 import { Deployment } from '../services/DataService'
 import { Pod } from '../services/DataService'
 import { Event } from '../services/DataService'
@@ -17,6 +18,22 @@ const DashboardComponent = () => {
   const [deployments, setDeployments] = useState<Deployment[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
   const [services, setServices] = useState<Service[]>([]);
+
+  // Yeni state'ler (mock datalarla)
+  const [secrets, setSecrets] = useState([
+    { name: "db-password", type: "Opaque", namespace: "default" },
+    { name: "api-key", type: "Opaque", namespace: "kube-system" }
+  ]);
+
+  const [roles, setRoles] = useState([
+    { name: "admin", rules: ["*"] },
+    { name: "developer", rules: ["get", "list", "watch"] }
+  ]);
+
+  const [logs, setLogs] = useState([
+    { user: "admin", action: "created secret", time: "2 mins ago" },
+    { user: "dev1", action: "accessed pod", time: "10 mins ago" }
+  ]);
 
   useEffect(() => {
     dataServiceInstance
@@ -42,7 +59,8 @@ const DashboardComponent = () => {
       .then(setEvents)
   }, [events])
 
-  return <><HeaderComponent
+  return <>
+  <HeaderComponent
     text="Deployments"
     icon="StopCircleIcon"
     refresh={() => { dataServiceInstance.getDeployments().then(setDeployments) }}
@@ -183,8 +201,79 @@ const DashboardComponent = () => {
       </tbody>
     </TableComponent>
     </EmptyComponent>
+
+    {/* SECRETS */}
+    <HeaderComponent
+      text="Secrets"
+      icon="Square2StackIcon"
+      refresh={() => { }}
+      count={secrets.length}
+    />
+    <EmptyComponent condition={() => secrets.length > 0}>
+      <TableComponent>
+        <TableHeaderComponent headers={["Name", "Type", "Namespace"]} />
+        <tbody>
+          {
+            secrets.map((secret, index) => (
+              <TableRowComponent index={index}>
+                <TableCellComponent bold>{secret.name}</TableCellComponent>
+                <TableCellComponent>{secret.type}</TableCellComponent>
+                <TableCellComponent>{secret.namespace}</TableCellComponent>
+              </TableRowComponent>
+            ))
+          }
+        </tbody>
+      </TableComponent>
+    </EmptyComponent>
+
+    {/* RBAC */}
+    <HeaderComponent
+      text="RBAC Roles"
+      icon="Square2StackIcon"
+      refresh={() => { }}
+      count={roles.length}
+    />
+    <EmptyComponent condition={() => roles.length > 0}>
+      <TableComponent>
+        <TableHeaderComponent headers={["Role", "Rules"]} />
+        <tbody>
+          {
+            roles.map((role, index) => (
+              <TableRowComponent index={index}>
+                <TableCellComponent bold>{role.name}</TableCellComponent>
+                <TableCellComponent>{role.rules.join(', ')}</TableCellComponent>
+              </TableRowComponent>
+            ))
+          }
+        </tbody>
+      </TableComponent>
+    </EmptyComponent>
+
+    {/* AUDIT LOGS */}
+    <HeaderComponent
+      text="Audit Logs"
+      icon="Square2StackIcon"
+      refresh={() => { }}
+      count={logs.length}
+    />
+    <EmptyComponent condition={() => logs.length > 0}>
+      <TableComponent>
+        <TableHeaderComponent headers={["User", "Action", "Time"]} />
+        <tbody>
+          {
+            logs.map((log, index) => (
+              <TableRowComponent index={index}>
+                <TableCellComponent bold>{log.user}</TableCellComponent>
+                <TableCellComponent>{log.action}</TableCellComponent>
+                <TableCellComponent>{log.time}</TableCellComponent>
+              </TableRowComponent>
+            ))
+          }
+        </tbody>
+      </TableComponent>
+    </EmptyComponent>
   </>
+  
 }
 
 export { DashboardComponent }
-

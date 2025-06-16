@@ -50,7 +50,14 @@ class DataService {
     namespace: string;
 
     constructor() {
-        this.namespace = "default"
+        this.namespace = "default"; // Default namespace
+        // You might want to fetch the namespaces here or in a separate method
+        this.getNamespaces().then(namespaces => {
+            if (namespaces.length > 0) {
+                this.namespace = namespaces[0].name; // Set to the first namespace by default
+            }
+        }
+        );  
     }
 
     setNamespace(namespace: string) {

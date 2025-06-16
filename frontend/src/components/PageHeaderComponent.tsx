@@ -24,8 +24,8 @@ const PageHeaderComponent = () => {
     return <div className="border-b-2 border-gray-500 border-solid">
         <div className="p-6 container mx-auto px-12">
             <div className="grid grid-cols-12 gap-4 items-center">
-                <div className="col-span-2 "><h1 className="text-1xl text-white font-bold uppercase"><Link to="/">Kubernetes Dashboard</Link></h1></div>
-                <div className="col-span-1 text-white bg-gray-500 p-2 text-center"><Link to="admin">Admin</Link></div>
+                <div className="col-span-2 "><h1 className="text-1xl text-white font-bold uppercase"><Link to="/">Kubernetes Security Dashboard 🎯</Link></h1></div>
+                <div className="col-span-1 text-white bg-sky-300  p-2 text-center"><Link to="admin">Admin</Link></div>
                 <div className="col-span-2 col-start-11">
                     <select onChange={(e) => updateNamespaces(e.currentTarget.value)} className="w-full text-center rounded-lg float-right">
                         {

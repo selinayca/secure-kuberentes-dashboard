@@ -10,13 +10,15 @@ import { DashboardComponent } from './components/DashboardComponent';
 import { PageHeaderComponent } from './components/PageHeaderComponent'
 import { AdminComponent } from './components/AdminComponent'
 
+
+
 // TODO: Add wrapping component
 const router = createBrowserRouter([
   {
     path: "/",
     element: <div>
       <PageHeaderComponent />
-      <div className="container mx-auto px-12 py-12 h-full bg-gray-600">
+      <div className="container mx-auto px-12 py-12 h-full bg-zinc-800">
         <DashboardComponent />
       </div>
     </div >
@@ -25,7 +27,7 @@ const router = createBrowserRouter([
     path: "/admin",
     element: <div>
       <PageHeaderComponent />
-      <div className="container mx-auto px-12 py-12 h-full bg-gray-600">
+      <div className="container mx-auto px-12 py-12 h-full bg-zinc-800">
         <AdminComponent />
       </div>
     </div >

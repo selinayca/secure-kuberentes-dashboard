@@ -28,6 +28,8 @@ app.get('/namespaces', async (_: Request, response: Response) => response.json(n
 const events = require('./stubs/events.json');
 app.get('/events/:namespace', async (_: Request, response: Response) => response.json(events));
 
+
+
 app.listen(port, function () {
     console.log("Listening on " + port);
 });
